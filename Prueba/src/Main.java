@@ -22,7 +22,7 @@ public class Main {
 		 Vector objects=new Vector(20);
 		 
 		
-		objects.add("2");
+		objects.add("5555555");
 		objects.add(Integer.valueOf(0));
 		objects.add(Stream.of(Collections.singleton("5")));
 		
