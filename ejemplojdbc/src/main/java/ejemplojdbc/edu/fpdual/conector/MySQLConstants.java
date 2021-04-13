@@ -1,5 +1,10 @@
 package ejemplojdbc.edu.fpdual.conector;
 
+/**
+ * MySQL Constants class.
+ * @author jose.m.prieto.villar
+ *
+ */
 public class MySQLConstants {
 
 	public static final String PASSWD = "jdbc.mysql.passwd";

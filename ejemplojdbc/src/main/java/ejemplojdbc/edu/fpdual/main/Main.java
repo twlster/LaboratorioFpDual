@@ -9,9 +9,10 @@ import ejemplojdbc.edu.fpdual.manager.CityManager;
 public class Main {
 
 	public static void main(String[] args) {
-		Conector conector = new Conector();
-		Connection con = conector.getMySQLConnection();
+		//Connects to the DB
+		Connection con =  new Conector().getMySQLConnection();
 		try {
+			//Looks for all the cities in the DB and prints them.
 			new CityManager().findAll(con).forEach(city ->System.out.println(city));
 		} finally {
 			try {
