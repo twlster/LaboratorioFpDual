@@ -24,7 +24,7 @@ class CountryManagerTest {
 	private Connection con;
 
 	@BeforeEach
-	public void setUp() throws SQLException {
+	public void setUp() throws SQLException, ClassNotFoundException {
 		con = new Conector().getMySQLConnection();
 		con.createStatement()
 				.executeUpdate("INSERT into Country (Code, Code2, Name, Region) values('999','9','Prueba','Prueba')");

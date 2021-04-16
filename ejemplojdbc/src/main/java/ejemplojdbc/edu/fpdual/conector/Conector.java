@@ -6,13 +6,18 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * Class responsible for creation DDBB connections.
  * @author jose.m.prieto.villar
  *
  */
 public class Conector {
-
+	
+	@Setter
+	@Getter
 	Properties prop = new Properties();
 
 	public Conector() {
@@ -27,8 +32,10 @@ public class Conector {
 	/**
 	 * Creates the connection object for a MySQL DDBB
 	 * @return a {@link Connection}
+	 * @throws ClassNotFoundException 
+	 * @throws SQLException 
 	 */
-	public Connection getMySQLConnection() {
+	public Connection getMySQLConnection() throws ClassNotFoundException, SQLException {
 		try {
 
 			//Indicates which driver is going to be used.
@@ -39,12 +46,13 @@ public class Conector {
 				return  DriverManager.getConnection(getURL());
 			} catch (SQLException e) {
 				e.printStackTrace();
+				throw e;
 			}
 
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
+			throw e;
 		}
-		return null;
 	}
 
 	/**
