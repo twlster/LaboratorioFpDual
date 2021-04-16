@@ -8,7 +8,7 @@ import ejemplojdbc.edu.fpdual.manager.CityManager;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		//Connects to the DB
 		Connection con =  new Conector().getMySQLConnection();
 		try {
