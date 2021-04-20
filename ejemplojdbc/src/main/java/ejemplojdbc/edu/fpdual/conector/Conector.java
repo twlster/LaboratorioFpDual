@@ -60,6 +60,7 @@ public class Conector {
 	 * @return an URL
 	 */
 	private String getURL() {
+		//jdbc:mysql://localhost:3306/world?user=sa&password=12345678&useSSL=false;
 		return new StringBuilder().append(prop.getProperty(MySQLConstants.URL_PREFIX))
 				.append(prop.getProperty(MySQLConstants.URL_HOST)).append(":")
 				.append(prop.getProperty(MySQLConstants.URL_PORT)).append("/")
