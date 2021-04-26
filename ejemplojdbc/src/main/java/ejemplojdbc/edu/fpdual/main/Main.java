@@ -18,17 +18,17 @@ public class Main {
 		Connection con = new Conector().getMySQLConnection();
 		try {
 			// Looks for all the cities in the DB and prints them.
-			// new CityManager().findAll(con).forEach(city ->System.out.println(city));
+			 System.out.println(new CityManager().findById(con, 2));
 
 //			List<Country> countries = new CountryManager().findBySurfaceAreaBetween(con, BigDecimal.valueOf(100),
 //					BigDecimal.valueOf(1000));
 //			System.out.println(countries.size());
 //			countries.forEach(country -> System.out.println(country));
-			new GeneralManager().findLanguajeDataWithPercentageGreaterThan(con, 0)
-					.forEach(data -> System.out.printf(
-							"Datos de la ciudad %s: lenguaje -> %s - Porcentaje de habla: %f - Pais: (%s) %s ",
-							data.getCityName(), data.getCityLanguage(), data.getLanguagePercentage(),
-							data.getCountryCode(), data.getCountryName() + "\n"));
+//			new GeneralManager().findLanguajeDataWithPercentageGreaterThan(con, 0)
+//					.forEach(data -> System.out.printf(
+//							"Datos de la ciudad %s: lenguaje -> %s - Porcentaje de habla: %f - Pais: (%s) %s ",
+//							data.getCityName(), data.getCityLanguage(), data.getLanguagePercentage(),
+//							data.getCountryCode(), data.getCountryName() + "\n"));
 		} finally {
 			try {
 				con.close();
