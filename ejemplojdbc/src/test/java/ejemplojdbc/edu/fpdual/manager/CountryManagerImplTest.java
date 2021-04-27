@@ -18,9 +18,10 @@ import org.junit.runner.RunWith;
 
 import ejemplojdbc.edu.fpdual.conector.Conector;
 import ejemplojdbc.edu.fpdual.dao.Country;
+import ejemplojdbc.edu.fpdual.manager.impl.CountryManagerImpl;
 
 @RunWith(JUnitPlatform.class)
-class CountryManagerTest {
+class CountryManagerImplTest {
 	private Connection con;
 
 	@BeforeEach
@@ -32,20 +33,20 @@ class CountryManagerTest {
 
 	@Test
 	public void findAll_CountyData_ok() {
-		List<Country> countries = new CountryManager().findAllById(con, Collections.singleton("999"));
+		List<Country> countries = new CountryManagerImpl().findAllById(con, Collections.singleton("999"));
 		assertNotNull(countries);
 	}
 
 	@Test
 	public void findAll_CountyData_ko() {
 		assertThrows(NullPointerException.class,
-				() -> new CountryManager().findAllById(null, Collections.singleton("999")));
+				() -> new CountryManagerImpl().findAllById(null, Collections.singleton("999")));
 	}
 	
 	@Test
 	public void findAll_ExceptionData_ko() {
 		NullPointerException exception =  assertThrows(NullPointerException.class,
-				() -> new CountryManager().findAllById(null, Collections.singleton("999")));
+				() -> new CountryManagerImpl().findAllById(null, Collections.singleton("999")));
 		assertEquals(null, exception.getMessage());
 	}
 

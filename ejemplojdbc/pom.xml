@@ -53,12 +53,25 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.11</version>
 		</dependency>
+		<!-- Mockito -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>2.21.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-junit-jupiter</artifactId>
+			<version>2.23.0</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 
 	<build>
 		<plugins>
-		<!-- JUnit 5 enabler plugins -->
+			<!-- JUnit 5 enabler plugins -->
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.22.2</version>

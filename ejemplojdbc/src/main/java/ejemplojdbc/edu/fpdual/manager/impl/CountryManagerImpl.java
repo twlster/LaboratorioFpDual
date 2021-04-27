@@ -1,4 +1,4 @@
-package ejemplojdbc.edu.fpdual.manager;
+package ejemplojdbc.edu.fpdual.manager.impl;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -26,7 +26,7 @@ import ejemplojdbc.edu.fpdual.dao.Country;
  * @author jose.m.prieto.villar
  *
  */
-public class CountryManager {
+public class CountryManagerImpl {
 
 	/**
 	 * Finds all the cities in the DB based on a list of ids.

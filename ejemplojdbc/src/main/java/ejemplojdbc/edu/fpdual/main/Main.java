@@ -7,9 +7,9 @@ import java.util.List;
 
 import ejemplojdbc.edu.fpdual.conector.Conector;
 import ejemplojdbc.edu.fpdual.dao.Country;
-import ejemplojdbc.edu.fpdual.manager.CityManager;
-import ejemplojdbc.edu.fpdual.manager.CountryManager;
-import ejemplojdbc.edu.fpdual.manager.GeneralManager;
+import ejemplojdbc.edu.fpdual.manager.impl.CityManagerImpl;
+import ejemplojdbc.edu.fpdual.manager.impl.CountryManagerImpl;
+import ejemplojdbc.edu.fpdual.manager.impl.GeneralManagerImpl;
 
 public class Main {
 
@@ -18,7 +18,7 @@ public class Main {
 		Connection con = new Conector().getMySQLConnection();
 		try {
 			// Looks for all the cities in the DB and prints them.
-			 System.out.println(new CityManager().findById(con, 2));
+			 System.out.println(new CityManagerImpl().findById(con, 2));
 
 //			List<Country> countries = new CountryManager().findBySurfaceAreaBetween(con, BigDecimal.valueOf(100),
 //					BigDecimal.valueOf(1000));

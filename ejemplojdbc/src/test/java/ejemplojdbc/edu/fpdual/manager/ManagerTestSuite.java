@@ -7,7 +7,7 @@ import org.junit.runners.Suite.SuiteClasses;
 //Declare Suite runner
 @RunWith(Suite.class)
 //Declare Test Suite Classes
-@SuiteClasses({CityManagerTest.class, CountryManagerTest.class})
+@SuiteClasses({CityManagerImplTest.class, CountryManagerImplTest.class})
 public class ManagerTestSuite {
 
 }

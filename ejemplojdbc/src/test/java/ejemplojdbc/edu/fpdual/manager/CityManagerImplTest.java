@@ -1,13 +1,13 @@
 package ejemplojdbc.edu.fpdual.manager;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assume.assumeNotNull;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -22,9 +22,10 @@ import org.junit.runner.RunWith;
 
 import ejemplojdbc.edu.fpdual.conector.Conector;
 import ejemplojdbc.edu.fpdual.dao.City;
+import ejemplojdbc.edu.fpdual.manager.impl.CityManagerImpl;
 
 @RunWith(JUnitPlatform.class)
-public class CityManagerTest {
+public class CityManagerImplTest {
 
 	private Connection con;
 	private int idMasAlto;
@@ -57,11 +58,11 @@ public class CityManagerTest {
 		assumeNotNull(con);
 
 		// Search for data
-		List<City> cities = new CityManager().findAll(con);
+		List<City> cities = new CityManagerImpl().findAll(con);
 
 		// Validates city list size
 		assertEquals(idMasAlto + 5, cities.size());
-		//Same assert but using Hamcrest Framework
+		// Same assert but using Hamcrest Framework
 		assertThat(cities.size(), is(idMasAlto + 5));
 	}
 
@@ -71,7 +72,7 @@ public class CityManagerTest {
 		assumeNotNull(con);
 
 		// Search for data
-		List<City> cities = new CityManager().findAll(con);
+		List<City> cities = new CityManagerImpl().findAll(con);
 
 		// Validates city data
 		for (City city : cities) {
@@ -86,13 +87,13 @@ public class CityManagerTest {
 
 	@Test
 	public void findAll_ko() {
-		assertThrows(NullPointerException.class, () -> new CityManager().findAll(null));
+		assertThrows(NullPointerException.class, () -> new CityManagerImpl().findAll(null));
 	}
 
 	@Test
 	public void findAll_SQLException_ko() throws SQLException {
 		con.createStatement().execute("use sys");
-		assertNull(new CityManager().findAll(con));
+		assertNull(new CityManagerImpl().findAll(con));
 	}
 
 	@AfterEach

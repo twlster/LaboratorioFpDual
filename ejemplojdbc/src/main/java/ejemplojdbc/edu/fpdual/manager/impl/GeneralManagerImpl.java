@@ -1,4 +1,4 @@
-package ejemplojdbc.edu.fpdual.manager;
+package ejemplojdbc.edu.fpdual.manager.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,7 +9,7 @@ import java.util.List;
 
 import ejemplojdbc.edu.fpdual.dao.CityLanguageData;
 
-public class GeneralManager {
+public class GeneralManagerImpl {
 
 	public List<CityLanguageData> findLanguajeDataWithPercentageGreaterThan(Connection con, int percentage)
 			throws SQLException {

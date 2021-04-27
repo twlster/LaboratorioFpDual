@@ -19,6 +19,9 @@ public class City {
 	String district;
 	BigDecimal population;
 
+	public City() {
+		
+	}
 	public City(ResultSet result) {
 		try {
 			this.id = result.getInt("ID");
