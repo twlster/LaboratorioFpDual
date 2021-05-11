@@ -11,7 +11,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class City {
+public class City implements Comparable<City>{
 
 	int id;
 	String name;
@@ -32,5 +32,9 @@ public class City {
 			e.printStackTrace();
 		}
 	}
-	
+
+	@Override
+	public int compareTo(City o) {
+		return this.name.compareTo(o.getName());
+	}
 }

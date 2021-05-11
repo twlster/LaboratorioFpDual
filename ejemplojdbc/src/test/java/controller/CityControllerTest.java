@@ -37,12 +37,15 @@ public class CityControllerTest {
 	@BeforeEach
 	public void setUp() throws SQLException, ClassNotFoundException {
 		MockitoAnnotations.initMocks(this);
-		Mockito.when(cityManager.findAll(Mockito.any(Connection.class))).thenReturn(Collections.emptyList());
-		Mockito.doReturn(Collections.emptyList()).when(cityManager.findAll(Mockito.any(Connection.class)));
+		//Mockito.doReturn(Collections.emptyList()).when(cityManager.findAll(Mockito.any(Connection.class)));
 	}
 
 	@Test
 	public void getAllCities_ok() throws ClassNotFoundException, SQLException {
+		City city = new City();
+		city.setName("Vicky");
+		Mockito.when(cityManager.findAll(Mockito.any(Connection.class))).thenReturn(Collections.emptyList());
+		Mockito.when(cityManager.findById(Mockito.any(Connection.class), Mockito.anyInt())).thenReturn(city);
 		List<City> cities = cityController.getAllCities();
 		assertNotNull(cities);
 		MatcherAssert.assertThat(cities, Matchers.hasSize(0));

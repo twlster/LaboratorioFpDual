@@ -54,7 +54,7 @@ public class CityManagerImpl implements CityManager{
 			}
 
 			// Fills the country of each city
-			//fillCountries(con, countries, cities);
+			fillCountries(con, countries, cities);
 
 			return cities;
 

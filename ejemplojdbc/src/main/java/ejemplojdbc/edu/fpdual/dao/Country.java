@@ -12,7 +12,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Country {
+public class Country implements Comparable<Country>{
 
 	String id;
 	String code;
@@ -30,6 +30,9 @@ public class Country {
 	String headOfState;
 	int capitalCode;
 
+	public Country() {
+		
+	}
 	public Country(ResultSet result) {
 		try {
 			this.id = result.getString("Code");
@@ -50,6 +53,10 @@ public class Country {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	@Override
+	public int compareTo(Country o) {
+		return this.name.compareTo(o.getName());
 	}
 	
 	

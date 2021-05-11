@@ -9,10 +9,17 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,6 +29,7 @@ import org.junit.runner.RunWith;
 
 import ejemplojdbc.edu.fpdual.conector.Conector;
 import ejemplojdbc.edu.fpdual.dao.City;
+import ejemplojdbc.edu.fpdual.dao.Country;
 import ejemplojdbc.edu.fpdual.manager.impl.CityManagerImpl;
 
 @RunWith(JUnitPlatform.class)
@@ -96,11 +104,41 @@ public class CityManagerImplTest {
 		assertNull(new CityManagerImpl().findAll(con));
 	}
 
+	@Test
+	public void findAll_GetCountries_ok() {
+		// Validate if connection is not null
+		assumeNotNull(con);
+
+		// Search for data
+		List<City> cities = new CityManagerImpl().findAll(con);
+
+		Map<Country, List<City>> citiesByCountry = cities.stream().collect(Collectors.groupingBy(City::getCountry));
+
+//		City ciudad = cities.stream().findFirst().orElse(new City());
+//		
+//		// if(ciudad.isPresent()) {
+//		System.out.println(ciudad.getName());
+		// }
+
+		citiesByCountry.entrySet().stream().flatMap(entry -> entry.getValue().stream()).sorted().limit(20).skip(2)
+				.forEach(city -> System.out.println(city.getName() + " of " + city.getCountry().getName()));
+
+//		List<Country> countries = cities.stream().map(this::getCountry).distinct().sorted()
+//				.collect(Collectors.toList());
+//
+//		countries.forEach(country -> System.out.println(country.getName()));
+
+	}
+
 	@AfterEach
 	public void tearDown() throws SQLException {
 		con.createStatement().execute("use world");
 		con.createStatement().executeUpdate("DELETE from city where ID >" + idMasAlto);
 		con.close();
+	}
+
+	private Country getCountry(City city) {
+		return city.getCountry();
 	}
 
 }

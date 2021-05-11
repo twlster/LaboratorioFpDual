@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -44,7 +46,7 @@ public class CityManagerImplMockTest {
 	ResultSet resultSet;
 
 	@Spy
-	List<String> spiedList;
+	List<String> spiedList = new ArrayList<>();
 	
 	private int idMasAlto;
 	private String name = "Prueba";
@@ -52,11 +54,16 @@ public class CityManagerImplMockTest {
 	@BeforeEach
 	public void setUp() throws SQLException, ClassNotFoundException {
 		MockitoAnnotations.initMocks(this);
+	}
+
+	@Test
+	public void findAll_ok() throws SQLException {
 		Mockito.when(con.createStatement()).thenReturn(statement);
 		Mockito.when(statement.executeQuery(Mockito.anyString())).thenReturn(resultSet);
 		Mockito.when(resultSet.getInt("ID")).thenReturn(1);
 		Mockito.when(resultSet.getString(Mockito.anyString())).thenReturn("String Prueba");
 		Mockito.when(resultSet.getBigDecimal("Population")).thenReturn(BigDecimal.TEN);
+		
 		Mockito.when(resultSet.next()).thenAnswer(new Answer<Boolean>() {
 
 			private int count = 0;
@@ -71,10 +78,6 @@ public class CityManagerImplMockTest {
 				}
 			}
 		});
-	}
-
-	@Test
-	public void findAll_ok() {
 		List<City> cities = cityManager.findAll(con);
 		assertNotNull(cities);
 		System.out.println(cities.get(0));
