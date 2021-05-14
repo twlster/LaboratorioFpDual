@@ -23,10 +23,17 @@ import edu.fpdualjavafx.ejemplofx.persistence.model.Log;
  */
 public class LogManager {
 
+	/**
+	 * Finds all the data from the collection.
+	 * @return
+	 */
 	public List<Log> findAll() {
 		List<Log> logs = new ArrayList<>();
+		//Creates DB Client.
 		try (MongoClient cliente = new Conector().getMongoDBDatabase()) {
+			//Obtains db to query.
 			MongoDatabase database = cliente.getDatabase("applogs");
+			//Create codec registry
 			CodecRegistry pojoCodecRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
 					fromProviders(PojoCodecProvider.builder().automatic(true).build()));
 			database = database.withCodecRegistry(pojoCodecRegistry);
