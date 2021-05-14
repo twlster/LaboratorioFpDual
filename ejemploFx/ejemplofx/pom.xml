@@ -36,6 +36,12 @@
 			<artifactId>mongodb-driver-sync</artifactId>
 			<version>4.2.3</version>
 		</dependency>
+		<!-- Java Mail dependency -->
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.6.2</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

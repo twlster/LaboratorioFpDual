@@ -9,6 +9,7 @@ import com.mongodb.client.MongoCollection;
 import com.sun.javafx.binding.StringFormatter;
 
 import edu.fpdualjavafx.ejemplofx.persistence.conector.Conector;
+import edu.fpdualjavafx.ejemplofx.persistence.manager.LogManager;
 import edu.fpdualjavafx.ejemplofx.persistence.model.Log;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -35,7 +36,8 @@ public class MainWindowController implements Initializable {
 		backgroundColor.setValue(Color.BLACK);
 		textColor.setValue(Color.LIGHTGREEN);
 		text.setStyle("-fx-control-inner-background: " + format(backgroundColor.getValue())
-				+ ";-fx-font-family: Consolas; -fx-text-fill:" + format(textColor.getValue()) + ";");
+				+ ";-fx-font-family: Consolas; -fx-text-fill:" + format(textColor.getValue()) + ";"
+				+ "-fx-font-size: 22");
 		loadText();
 	}
 
@@ -86,10 +88,9 @@ public class MainWindowController implements Initializable {
 	}
 
 	private void loadText() {
-		MongoCollection<Log> collection = new Conector().getMongoDBDatabase().getCollection("logs", Log.class);
-		for (String log : collection.find().map(data -> StringFormatter
-				.format("[%s] -- [%s] -- %s", data.getType(), data.getDateTime(), data.getText()).toString())) {
-			text.appendText(log);
+		for (Log data : new LogManager().findAll()) {
+			text.appendText(StringFormatter
+					.format("[%s] -- [%s] -- %s\n", data.getType(), data.getDateTime(), data.getText()).get());
 		}
 	}
 }

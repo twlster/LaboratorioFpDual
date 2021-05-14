@@ -3,16 +3,18 @@ package edu.fpdualjavafx.ejemplofx.persistence.model;
 import org.bson.types.ObjectId;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
-public final class Log {
+@NoArgsConstructor
+@ToString
+public class Log {
 
-	private ObjectId id;
+	private ObjectId _id;
 	@NonNull
 	private String dateTime;
 	@NonNull

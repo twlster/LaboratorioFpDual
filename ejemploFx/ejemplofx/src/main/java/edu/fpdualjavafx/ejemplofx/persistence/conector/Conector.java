@@ -43,31 +43,22 @@ public class Conector {
 	 * 
 	 * @return a {@link MongoDatabase}
 	 */
-	public MongoDatabase getMongoDBDatabase() {
-		CodecRegistry pojoCodecRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
-                fromProviders(PojoCodecProvider.builder().automatic(true).build()));
-		MongoClientSettings settings = MongoClientSettings.builder()
-		        .codecRegistry(pojoCodecRegistry)
-		        .build();
-		MongoClient mongoClient = MongoClients.create(getURI());
-		MongoDatabase database = mongoClient.getDatabase("applog");
-		database = database.withCodecRegistry(pojoCodecRegistry);
-
-		return database;
-
+	public MongoClient getMongoDBDatabase() {
+		return MongoClients.create(getURI());
 	}
 
 	/**
-	 * Obtains the URI to connect to a MySQL DDBB.
+	 * Obtains the URI to connect to a MongoDB.
 	 * 
 	 * @return an URI
 	 */
 	private String getURI() {
-		// mongodb+srv://<username>:<password>@<cluster-address>/test
+		// mongodb://<username>:<password>@<cluster-address>/test
+		// ejemplo --> Mongo como Network Service --> mongodb://host:port
+		// ejemplo --> Mongo como Local Service --> mongodb://user:password@host:port/test
 		return new StringBuilder().append(prop.getProperty(MongoDBConstants.URL_PREFIX))
 				.append(prop.getProperty(MongoDBConstants.URL_HOST)).append(":")
-				.append(prop.getProperty(MongoDBConstants.URL_PORT)).append("/")
-				.append(prop.getProperty(MongoDBConstants.URL_SCHEMA)).toString();
+				.append(prop.getProperty(MongoDBConstants.URL_PORT)).toString();
 	}
 
 }
