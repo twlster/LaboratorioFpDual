@@ -36,13 +36,13 @@ public class Sender {
 
 	@Setter
 	@Getter
-	Properties prop = new Properties();
+	Properties credencialProp = new Properties();
 
 	public Sender() {
 		try {
 			// Loads all the properties of file "mail.properties".
 			mailProp.load(getClass().getClassLoader().getResourceAsStream("mail.properties"));
-			prop.load(getClass().getClassLoader().getResourceAsStream("credentials.properties"));
+			credencialProp.load(getClass().getClassLoader().getResourceAsStream("credentials.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -67,7 +67,7 @@ public class Sender {
 			// Attach a file.
 			//First Part of the body: text
 			BodyPart texto = new MimeBodyPart();
-			texto.setText(text);
+			texto.setContent(text,"text/html");
 
 			//Second Part of the body: project properties file.
 			File file = new File(content);
@@ -110,9 +110,6 @@ public class Sender {
 		// Get the Session object.// and pass username and password
 		Session session = createSession();
 
-		// Used to debug SMTP issues
-		session.setDebug(true);
-
 		try {
 			// Create a default MimeMessage object.
 			MimeMessage message = new MimeMessage(session);
@@ -127,7 +124,7 @@ public class Sender {
 			message.setSubject(subject);
 
 			// Now set the actual message
-			message.setText(content);
+			message.setContent(content,"text/html" );
 
 			System.out.println("sending...");
 			// Send message
@@ -144,8 +141,8 @@ public class Sender {
 	private Session createSession() {
 		Session session = Session.getInstance(mailProp, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(prop.getProperty(CredentialsConstants.USER),
-						prop.getProperty(CredentialsConstants.PASSWD));
+				return new PasswordAuthentication(credencialProp.getProperty(CredentialsConstants.USER),
+						credencialProp.getProperty(CredentialsConstants.PASSWD));
 			}
 
 		});
@@ -156,8 +153,8 @@ public class Sender {
 	}
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
-		new Sender().send("twlster.mk@gmail.com", "pvillarserrano@gmail.com", "Hola BabyJar ;) :*",
-				"Asi se envian correos con Java... Guillermo ¬¬","c:\\DEV\\temp\\mail.properties");
+		new Sender().send("twlster.mk@gmail.com", "mcruzlp@gmail.com", "Hola =D",
+				"<b>Asi se envian correos con Java...<b>","c:\\DEV\\temp\\mail.properties");
 
 	}
 
