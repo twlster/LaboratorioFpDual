@@ -30,7 +30,7 @@ public class LogManager {
 	public List<Log> findAll() {
 		List<Log> logs = new ArrayList<>();
 		//Creates DB Client.
-		try (MongoClient cliente = new Conector().getMongoDBDatabase()) {
+		try (MongoClient cliente = new Conector().getMongoDBClient()) {
 			//Obtains db to query.
 			MongoDatabase database = cliente.getDatabase("applogs");
 			//Create codec registry
@@ -38,6 +38,7 @@ public class LogManager {
 					fromProviders(PojoCodecProvider.builder().automatic(true).build()));
 			database = database.withCodecRegistry(pojoCodecRegistry);
 			database.getCollection("logs", Log.class).find().forEach(logs::add);
+			
 			return logs;
 		}
 	}

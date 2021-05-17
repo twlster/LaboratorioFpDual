@@ -43,7 +43,7 @@ public class Conector {
 	 * 
 	 * @return a {@link MongoDatabase}
 	 */
-	public MongoClient getMongoDBDatabase() {
+	public MongoClient getMongoDBClient() {
 		return MongoClients.create(getURI());
 	}
 
