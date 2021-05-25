@@ -21,30 +21,28 @@ import com.itextpdf.text.Image;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfReader;
-import com.itextpdf.text.pdf.PdfStamper;
 import com.itextpdf.text.pdf.PdfWriter;
 
-public class PdfCreator {
+public class IText5PdfCreator {
 
 	public Document createDocument(File file) throws IOException, URISyntaxException, DocumentException {
 		Document document = new Document();
 		try (FileOutputStream fileStream = new FileOutputStream(file)) {
 			PdfWriter pdfWriter = PdfWriter.getInstance(document, fileStream);
-
+			
 			pdfWriter.setEncryption("user".getBytes(), "1234".getBytes(), PdfWriter.ALLOW_PRINTING,
 					PdfWriter.ENCRYPTION_AES_256);
-
+			
 			document.open();
-			Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
-			Chunk chunk = new Chunk("Hello World", font);
+			Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 20, BaseColor.BLUE);
+			Chunk chunk = new Chunk("Pacticando como crear un PDF feo :P", font);
+			Phrase phrase = new Phrase(chunk);
 
-			document.add(chunk);
+			document.add(phrase);
 
 			Path path = Paths.get(getClass().getResource("/img/ok.png").toURI());
 			Image img = Image.getInstance(path.toAbsolutePath().toString());
-			img.setWidthPercentage((float) 0.2);
-			img.setScaleToFitHeight(true);
+			img.scalePercent(60);
 			document.add(img);
 
 			PdfPTable table = new PdfPTable(3);
@@ -95,7 +93,7 @@ public class PdfCreator {
 
 	public static void main(String[] args)
 			throws MalformedURLException, IOException, URISyntaxException, DocumentException {
-		new PdfCreator().createDocument(new File("C:\\Users\\jose.m.prieto.villar\\Desktop\\temp2.pdf"));
+		new IText5PdfCreator().createDocument(new File("C:\\Users\\jose.m.prieto.villar\\Desktop\\temp2.pdf"));
 	}
 
 }

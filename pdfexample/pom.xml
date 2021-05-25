@@ -12,14 +12,24 @@
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+		<itext.version>7.1.15</itext.version>
 	</properties>
 
 	<dependencies>
+		<!-- IText version 5 -->
 		<dependency>
 			<groupId>com.itextpdf</groupId>
 			<artifactId>itextpdf</artifactId>
 			<version>5.5.13.2</version>
 		</dependency>
+		<!-- add all iText 7 modules -->
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itext7-core</artifactId>
+			<version>${itext.version}</version>
+			<type>pom</type>
+		</dependency>
+		<!-- Bouncy Castle to protect PDF -->
 		<dependency>
 			<groupId>org.bouncycastle</groupId>
 			<artifactId>bcprov-jdk15on</artifactId>
