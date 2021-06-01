@@ -1,4 +1,4 @@
-package edu.fpdual.web.fpdualweb.dto;
+package edu.fpdual.web.fpdualweb.api.dto;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
